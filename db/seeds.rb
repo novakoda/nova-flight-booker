@@ -9,4 +9,29 @@
 
 airports = Airport.create([{ code: 'IAH' }, { code: 'LAX' }, { code: 'ATL' }, { code: 'DFW' }, { code: 'JFK' }])
 
-iah2lax = Flight.create(from_airport_id: 1, to_airport_id: 2, depart_time: '2020-09-02 12:45:00', duration: 12600)
+iah2lax = Flight.create([
+  {from_airport_id: 1, to_airport_id: 2, depart_time: '2020-09-02 22:45:00', duration: 12600},
+  {from_airport_id: 1, to_airport_id: 3, depart_time: '2020-08-23 15:15:00', duration: 10500},
+  {from_airport_id: 1, to_airport_id: 4, depart_time: '2020-06-11 01:10:00', duration: 5000},
+  {from_airport_id: 1, to_airport_id: 5, depart_time: '2020-07-18 11:30:00', duration: 13400},
+
+  {from_airport_id: 2, to_airport_id: 1, depart_time: '2020-09-30 12:35:00', duration: 12600},
+  {from_airport_id: 2, to_airport_id: 3, depart_time: '2020-07-04 15:25:00', duration: 22300},
+  {from_airport_id: 2, to_airport_id: 4, depart_time: '2020-08-13 23:10:00', duration: 12000},
+  {from_airport_id: 2, to_airport_id: 5, depart_time: '2020-06-16 07:55:00', duration: 23200},
+
+  {from_airport_id: 3, to_airport_id: 1, depart_time: '2020-06-05 15:30:00', duration: 10500},
+  {from_airport_id: 3, to_airport_id: 2, depart_time: '2020-07-16 21:05:00', duration: 22300},
+  {from_airport_id: 3, to_airport_id: 4, depart_time: '2020-08-29 09:45:00', duration: 10000},
+  {from_airport_id: 3, to_airport_id: 5, depart_time: '2020-09-03 03:40:00', duration: 7500},
+
+  {from_airport_id: 4, to_airport_id: 1, depart_time: '2020-07-28 16:20:00', duration: 5000},
+  {from_airport_id: 4, to_airport_id: 2, depart_time: '2020-09-14 11:15:00', duration: 12000},
+  {from_airport_id: 4, to_airport_id: 3, depart_time: '2020-08-17 04:00:00', duration: 10000},
+  {from_airport_id: 4, to_airport_id: 5, depart_time: '2020-06-09 19:50:00', duration: 11500},
+
+  {from_airport_id: 5, to_airport_id: 1, depart_time: '2020-08-11 13:10:00', duration: 13400},
+  {from_airport_id: 5, to_airport_id: 2, depart_time: '2020-09-22 03:35:00', duration: 23200},
+  {from_airport_id: 5, to_airport_id: 3, depart_time: '2020-06-19 16:25:00', duration: 7500},
+  {from_airport_id: 5, to_airport_id: 4, depart_time: '2020-07-22 11:05:00', duration: 11500}
+])
