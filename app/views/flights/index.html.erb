@@ -14,6 +14,13 @@
   </thead>
 
   <tbody>
+    <h3>Search By Departing Airport: </h3>
+    <%= form_tag flights_path, method: :get do %>
+      <%= collection_select(:flight, :from_airport_id, Airport.all, :id, :code, prompt: true) %>
+      <!-- select_tag "from_airport_id", options_from_collection_for_select(Airport.order(:code), :id, :code) -->
+      <%= submit_tag "Search" %>
+    <% end %>
+    <h3>All Flights</h3>
     <% @flights.each do |flight| %>
       <tr>
         <td><%= flight.from_airport.code %></td>
