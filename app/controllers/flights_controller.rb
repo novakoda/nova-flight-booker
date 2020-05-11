@@ -5,7 +5,7 @@ class FlightsController < ApplicationController
   # GET /flights.json
   def index
     if params[:flight]
-      @flights = Flight.where({from_airport_id: params[:flight][:from_airport_id]}).order("depart_time")
+      @flights = Flight.where({from_airport_id: params[:flight][:from_airport_id], to_airport_id: params[:flight][:to_airport_id]}).order("depart_time")
     else
       @flights = Flight.all.order("depart_time")
     end

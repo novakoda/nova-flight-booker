@@ -5,7 +5,6 @@ class CreateFlights < ActiveRecord::Migration[5.2]
       t.references :to_airport
       t.datetime :depart_time
       t.integer :duration
-
       t.timestamps
     end
     add_foreign_key :flights, :airports, column: :from_airport_id

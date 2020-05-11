@@ -17,6 +17,8 @@
     <h3>Search By Departing Airport: </h3>
     <%= form_tag flights_path, method: :get do %>
       <%= collection_select(:flight, :from_airport_id, Airport.all, :id, :code, prompt: true) %>
+      <%= collection_select(:flight, :to_airport_id, Airport.all, :id, :code, prompt: true) %>
+      <%= date_select(:flight, :depart_time) %>
       <!-- select_tag "from_airport_id", options_from_collection_for_select(Airport.order(:code), :id, :code) -->
       <%= submit_tag "Search" %>
     <% end %>
