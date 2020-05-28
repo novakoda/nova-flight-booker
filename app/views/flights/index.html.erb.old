@@ -16,12 +16,10 @@
   <tbody>
     <h3>Search By Departing Airport: </h3>
     <%= form_tag flights_path, method: :get do %>
-      <%= collection_select(:flight, :origin_id, Airport.all, :id, :code, prompt: "Origin",
-       selected: @flights.blank? ? 1 : @flights.first.origin.id ) %> ->
-      <%= collection_select(:flight, :destination_id, Airport.all, :id, :code, prompt: "Destination",
-       selected: @flights.blank? ? 2 : @flights.first.destination.id ) %>
-      <%= date_select(:flight, :depart_time, selected: !@flights.blank? ? @flights.first.depart_time : Date.current ) %>
-      <%= select(:flight, :passenger_num, 1..4, selected: !@flights.blank? && @passenger_num ? @passenger_num : 1 ) %>
+      <%= collection_select(:flight, :origin_id, Airport.all, :id, :code, prompt: true) %>
+      <%= collection_select(:flight, :destination_id, Airport.all, :id, :code, prompt: true) %>
+      <%= date_select(:flight, :depart_time) %>
+      <!-- select_tag "origin_id", options_from_collection_for_select(Airport.order(:code), :id, :code) -->
       <%= submit_tag "Search" %>
     <% end %>
 
@@ -32,7 +30,7 @@
         <td><%= flight.destination.code %></td>
         <td><%= flight.depart_time %></td>
         <td><%= Time.at(flight.duration).utc.strftime("%H h %M m") %></td>
-        <td><%= link_to 'Book', new_booking_path(flight_id: flight.id, passenger_num: @passenger_num) %></td>
+        <td><%= link_to 'Book', new_booking_path(flight_id: flight.id) %></td>
       </tr>
     <% end %>
   </tbody>

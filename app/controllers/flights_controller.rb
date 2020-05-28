@@ -5,7 +5,9 @@ class FlightsController < ApplicationController
   # GET /flights.json
   def index
     if params[:flight]
-      @flights = Flight.where({from_airport_id: params[:flight][:from_airport_id], to_airport_id: params[:flight][:to_airport_id]}).order("depart_time")
+      @flights = Flight.where({origin_id: params[:flight][:origin_id],
+        destination_id: params[:flight][:destination_id]}).order("depart_time")
+      @passenger_num = params[:flight][:passenger_num]
     else
       @flights = Flight.all.order("depart_time")
     end
@@ -73,6 +75,6 @@ class FlightsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flight_params
-      params.require(:flight).permit(:from_airport_id, :to_airport_id, :depart_time, :duration)
+      params.require(:flight).permit(:origin_id, :destination_id, :depart_time, :duration)
     end
 end

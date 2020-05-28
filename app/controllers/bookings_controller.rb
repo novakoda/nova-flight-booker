@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    params[:bookings].blank? ? @bookings = Booking.all : @bookings = Booking.where(id: params[:bookings]).all
   end
 
   # GET /bookings/1
@@ -15,6 +15,8 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @booked_flight = Flight.find(params[:flight_id])
+    @passenger_num = params[:passenger_num]
   end
 
   # GET /bookings/1/edit
@@ -24,17 +26,19 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    @booking = Booking.new(booking_params)
+    @passenger_num = params[:passenger_num].to_i
+    @created_bookings = []
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    @passenger_num.times do |i|
+      @booking = Booking.new(
+        flight: Flight.find(params[:flight]),
+        passenger: Passenger.new(name: params[:passengers][:"name#{i+1}"],
+                         email: params[:passengers][:"email#{i+1}"]))
+      @booking.save
+      @created_bookings << @booking
     end
+    flash[:notice] = "Your flight has been booked! Have a great trip!"
+    redirect_to controller: 'bookings', action: 'index', bookings: @created_bookings
   end
 
   # PATCH/PUT /bookings/1

@@ -1,5 +1,10 @@
 <h1>New Booking</h1>
 
+<p>From: <%= @booked_flight.origin.code %></p>
+<p>To: <%= @booked_flight.destination.code %></p>
+<p>Depart Time: <%= @booked_flight.depart_time %></p>
+<p>Length: <%= Time.at(@booked_flight.duration).utc.strftime("%H h %M m") %></p>
+
 <%= render 'form', booking: @booking %>
 
 <%= link_to 'Back', bookings_path %>

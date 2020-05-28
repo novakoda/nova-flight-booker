@@ -1,27 +1,25 @@
-<%= form_with(model: booking, local: true) do |form| %>
-  <% if booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+<%= form_for @booking do |f| %>
+  <%= hidden_field_tag "flight", @booked_flight.id %>
+  <%= hidden_field_tag "passenger_num", @passenger_num %>
 
-      <ul>
-      <% booking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <% @passenger_num.to_i.times do |i| %>
+    <%= fields_for :passengers, @booking.passenger do |passenger_fields| %>
+      <h3>Passenger <%= i+1 %></h3>
+
+      <div class="field">
+        <%= passenger_fields.label :"Name" %>
+        <%= passenger_fields.text_field :"name#{i+1}", required: true %>
+      </div>
+
+      <div class="field">
+        <%= passenger_fields.label :"Email" %>
+        <%= passenger_fields.email_field :"email#{i+1}", required: true %>
+      </div>
+    <% end %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :flight %>
-    <%= form.text_field :flight %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user %>
-    <%= form.text_field :user %>
-  </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit "Book Flight" %>
   </div>
+
 <% end %>

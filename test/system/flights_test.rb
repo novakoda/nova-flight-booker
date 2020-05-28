@@ -16,8 +16,8 @@ class FlightsTest < ApplicationSystemTestCase
 
     fill_in "Depart time", with: @flight.depart_time
     fill_in "Duration", with: @flight.duration
-    fill_in "From airport", with: @flight.from_airport_id
-    fill_in "To airport", with: @flight.to_airport_id
+    fill_in "From airport", with: @flight.origin_id
+    fill_in "To airport", with: @flight.destination_id
     click_on "Create Flight"
 
     assert_text "Flight was successfully created"
@@ -30,8 +30,8 @@ class FlightsTest < ApplicationSystemTestCase
 
     fill_in "Depart time", with: @flight.depart_time
     fill_in "Duration", with: @flight.duration
-    fill_in "From airport", with: @flight.from_airport_id
-    fill_in "To airport", with: @flight.to_airport_id
+    fill_in "From airport", with: @flight.origin_id
+    fill_in "To airport", with: @flight.destination_id
     click_on "Update Flight"
 
     assert_text "Flight was successfully updated"

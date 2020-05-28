@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Flight</th>
-      <th>User</th>
+      <th>Passenger</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,16 +14,11 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.flight %></td>
-        <td><%= booking.user %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= booking.flight.origin.code %> -> <%= booking.flight.destination.code %>, <%= booking.flight.depart_time %></td>
+        <td><%= booking.passenger.name %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Booking', new_booking_path %>
