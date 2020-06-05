@@ -35,6 +35,7 @@ class BookingsController < ApplicationController
         passenger: Passenger.new(name: params[:passengers][:"name#{i+1}"],
                          email: params[:passengers][:"email#{i+1}"]))
       @booking.save
+      PassengerMailer.with(passenger: @booking.passenger).welcome_email.deliver_now
       @created_bookings << @booking
     end
     flash[:notice] = "Your flight has been booked! Have a great trip!"
